@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    container_name: backend_rest
+    build: .
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000" &&
+             python manage.py spectacular --color --file schema.yml
+    volumes:
+      - .:/usr/src/django_test/
+    ports:
+      - 8000:8000
+#  app:
+#    container_name: fapp
+#    image: fapp
+#    build:
+#      context: .
+#      target: development
+#      dockerfile: fapp.Dockerfile
+#    volumes:
+#      - ./src:/app/src
+#    ports:
+#      - 3000:3000
